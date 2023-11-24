@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock Paper Scissor game</title>
+<style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@1,6..96&family=Outfit:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+body {
+   background: gray;
+   color: white;
+   max-width:100%;
+}
+#title, h3 {
+ text-align:center;
+ font-family: 'Bodoni Moda', serif;
+}
+ 
+#rules {
+  font-family: 'Tangerine', cursive;
+  text-align:center;
+  color:red;
+  font-size:22px;
+}
+.container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.option {
+  display: inline-block;
+  border-radius: 5px;
+  box-shadow: 3px 3px 4px #111;
+  padding: 5px;
+  margin-right: 5px;
+  text-align: center;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+}
+.option p {
+    font-family: 'Rye', serif;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+textarea {
+    display: inline-block;
+    margin-top:40px;
+    width: 300px;
+    height: 155px;
+    overflow: auto;
+}
+textarea {
+    text-align: center;
+    font-family: 'Bungee', sans-serif;
+    color: #000;
+}
+</style>
+</head>
+<body>
+ <h1 id="title">Welcome to Rock Paper Scissors</h1>
+ <p id="rules" >Remember that Rocks beats Scissors, Paper beats Rock, and Scissors beat Rock</p>
+ <h3>Please make your selection below:</h3>
+ 
+<div class="container">
+ <!--Rock Starts here -->
+ <div class="clearfix option">
+  <img src="rock.png" alt="Pineapple" width="85" height="85" id="rock">
+  <p>Rock</p>
+</div>
+
+ <!--Paper Starts here-->
+ <div id="paper" class="clearfix option">
+  <img src="paper.png" height="85px" width="85px" id="paper">
+  <p>Paper</p>
+ </div>
+ 
+ <!--Scissors Starts here-->
+ <div id="scissor" class="clearfix option">
+     <img src="scissors.png" height="85px" width="85px" id="scissors">
+     <p>Scissors</p>
+ </div> 
+ 
+ <!-- Results section -->
+ <div class="results">
+     <textarea disabled="true" id="display"></textarea>
+ </div>
+</div>
+
+<script>
+     const rock = document.querySelector("#rock");
+    const paper = document.querySelector("#paper");
+    const scissors = document.querySelector("#scissors");
+     const display = document.querySelector("#display");
+     let results = null;
+     let playerScore = 0;
+     let computerScore = 0;
+     
+     rock.onclick = function(){
+         let rand = Math.random();
+         let randNum = Math.floor(rand*3);
+         let compOption = computerChoice(randNum);
+         if(compOption === "Rock"){
+            results = "Draw"
+         } else if(compOption === "Scissors"){
+             playerScore++;
+            results = "Player won"; 
+         } else {
+             computerScore++;
+            results = "Computer won";
+         }
+        display.innerHTML = `${results}\nPlayer ${playerScore}:${computerScore} Computer\nRock vs ${computerChoice(randNum)}`
+     }
+     
+     paper.onclick = function(){
+         let rand = Math.random();
+         let randNum = Math.floor(rand*3);
+         let compOption = computerChoice(randNum);
+         if(compOption === "Paper"){
+            results = "Draw"
+         } else if(compOption === "Rock"){
+             playerScore++;
+            results = "Player won"; 
+         } else {
+             computerScore++;
+            results = "Computer won";
+         }
+        display.innerHTML = `${results}\nPlayer ${playerScore}:${computerScore} Computer\nPaper vs ${computerChoice(randNum)}`
+        
+     }
+     
+     scissors.onclick = function(){
+         let rand = Math.random();
+         let randNum = Math.floor(rand*3);
+         let compOption = computerChoice(randNum);
+         if(compOption === "Scissors"){
+            results = "Draw"
+         } else if(compOption === "Paper"){
+             playerScore++;
+            results = "Player won"; 
+         } else {
+             computerScore++;
+            results = "Computer won";
+         }
+        display.innerHTML = `${results}\nPlayer ${playerScore}:${computerScore} Computer\nScissors vs ${computerChoice(randNum)}`
+     } 
+     
+     
+     function computerChoice(a){
+         let comOption = null;
+         switch(a){
+             case 0:
+                comOption = "Rock";
+                break;
+             case 1:
+                 comOption = "Paper";
+                 break;
+             case 2:
+                 comOption = "Scissors";
+         }
+         return comOption;
+     }
+   
+</script>
+</body>
+</html>
